@@ -31,6 +31,15 @@ fn main() {
     let ledger_user = AccountIdentifier::new(ledger_canister_id.get(), Some(user_subaccount_1));
     println!("ledger_user: {:?}, ledger_user string: {:?}", 
             ledger_user, ledger_user.to_hex());
+
+    // r7inp-6aaaa-aaaaa-aaabq-cai
+    // b5c38c5c8e63d89751b8f8b3fd9deceda70c281b87957ca44319c9758a3dbef2
+    let canister_id_1: CanisterId = canister_from_str("ryjl3-tyaaa-aaaaa-aaaba-cai").unwrap();
+    println!("canister_id_1: {:?}", canister_id_1.to_hex());
+
+    // cav4d-eaaaa-aaaah-aaqrq-cai
+    let canister_id_2: CanisterId = canister_from_str("ryjl3-tyaaa-aaaaa-aaaba-cai").unwrap();
+    println!("canister_id_2: {:?}", canister_id_2.to_hex());
 }
 
 fn principal_from_str(input: &str) -> Result<PrincipalId, PrincipalIdParseError> {
