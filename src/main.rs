@@ -34,12 +34,16 @@ fn main() {
 
     // r7inp-6aaaa-aaaaa-aaabq-cai
     // b5c38c5c8e63d89751b8f8b3fd9deceda70c281b87957ca44319c9758a3dbef2
-    let canister_id_1: CanisterId = canister_from_str("ryjl3-tyaaa-aaaaa-aaaba-cai").unwrap();
-    println!("canister_id_1: {:?}", canister_id_1.to_hex());
+    let canister_id_1: CanisterId = canister_from_str("r7inp-6aaaa-aaaaa-aaabq-cai").unwrap();
+    let canister_account_id_1: AccountIdentifier = AccountIdentifier::from(canister_id_1);
+
+    println!("canister_id_1: {:?}", canister_account_id_1.to_hex());
 
     // cav4d-eaaaa-aaaah-aaqrq-cai
-    let canister_id_2: CanisterId = canister_from_str("ryjl3-tyaaa-aaaaa-aaaba-cai").unwrap();
-    println!("canister_id_2: {:?}", canister_id_2.to_hex());
+    // de1f034caa685d629434aa2880e59512968c2197fc268c9c195068cd7b684425
+    let canister_id_2: CanisterId = canister_from_str("cav4d-eaaaa-aaaah-aaqrq-cai").unwrap();
+    let canister_account_id_2: AccountIdentifier = AccountIdentifier::from(canister_id_2);
+    println!("canister_id_2: {:?}", canister_account_id_2.to_hex());
 }
 
 fn principal_from_str(input: &str) -> Result<PrincipalId, PrincipalIdParseError> {
