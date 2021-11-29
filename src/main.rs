@@ -44,6 +44,11 @@ fn main() {
     let canister_id_2: CanisterId = canister_from_str("cav4d-eaaaa-aaaah-aaqrq-cai").unwrap();
     let canister_account_id_2: AccountIdentifier = AccountIdentifier::from(canister_id_2);
     println!("canister_id_2: {:?}", canister_account_id_2.to_hex());
+    
+
+    let canister = try_from([25, 164, 8, 222, 247, 226, 127, 20, 25, 228, 250, 17, 38, 101, 11, 160, 185, 107, 51, 90, 213, 5, 199, 20, 64, 243, 64, 251]).unwrap();
+    println!("canister: {:?}", canister);
+
 }
 
 fn principal_from_str(input: &str) -> Result<PrincipalId, PrincipalIdParseError> {
