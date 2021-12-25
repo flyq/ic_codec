@@ -9,3 +9,4 @@ edition = "2018"
 ic-base-types = { git = "https://github.com/dfinity/ic" }
 ledger-canister = { git = "https://github.com/dfinity/ic" }
 base32 = "0.4.0"
+hex = "0.3.1"

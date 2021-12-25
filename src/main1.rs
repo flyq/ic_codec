@@ -8,11 +8,47 @@ use std::convert::TryInto;
 const CRC_LENGTH_IN_BYTES: usize = 4;
 
 fn main() {
-  
+    // ledger, ryjl3-tyaaa-aaaaa-aaaba-cai
+    let ledger_canister_id: CanisterId = CanisterId::from_u64(2); 
+    let ledger_principal_id: PrincipalId = *ledger_canister_id.get_ref();
+    let ledger_account_id: AccountIdentifier = AccountIdentifier::from(ledger_principal_id);
+    let ledger_subaccount: Subaccount = Subaccount::from(&ledger_principal_id);
+
+    let ledger_canister_id_1: CanisterId = canister_from_str("ryjl3-tyaaa-aaaaa-aaaba-cai").unwrap();
+    assert_eq!(ledger_canister_id, ledger_canister_id_1);
+    println!("Ledger canister id: {:?},\nprincipal id: {:?},\nprincipal id slice: {:?},\naccount id: {:?},\naccount id slice: {:?},\naccount id hex string: {:?},\nsubaccount: {:?},\nsubaccount slice: {:?},\n", 
+                 ledger_canister_id, ledger_principal_id, ledger_principal_id.as_slice(), ledger_account_id, ledger_account_id.to_vec(), ledger_account_id.to_hex(), ledger_subaccount, Vec::from(ledger_subaccount));
+
     // user, yhy6j-huy54-mkzda-m26hc-yklb3-dzz4l-i2ykq-kr7tx-dhxyf-v2c2g-tae
     let user_principal_id: PrincipalId = principal_from_str("yhy6j-huy54-mkzda-m26hc-yklb3-dzz4l-i2ykq-kr7tx-dhxyf-v2c2g-tae").unwrap();
-    println!("user principal id: {:?},\nprincipal id slice: {:?},\n",
-                user_principal_id, user_principal_id.as_slice());
+    let user_account_id: AccountIdentifier = AccountIdentifier::from(user_principal_id);
+    let user_subaccount_1: Subaccount = Subaccount::from(&user_principal_id);
+    let user_subaccount_2: Subaccount = subaccount_from_principal(&user_principal_id);
+    assert_eq!(user_subaccount_1, user_subaccount_2);
+    println!("user principal id: {:?},\nprincipal id slice: {:?},\naccount id: {:?},\naccount id slice: {:?},\naccount id hex string: {:?},\nsubaccount: {:?},\nsubaccount slice: {:?},\n", 
+                user_principal_id, user_principal_id.as_slice(), user_account_id, user_account_id.to_vec(), user_account_id.to_hex(), user_subaccount_1, Vec::from(user_subaccount_1));
+
+    let ledger_user = AccountIdentifier::new(ledger_canister_id.get(), Some(user_subaccount_1));
+    println!("ledger_user: {:?}, ledger_user string: {:?}", 
+            ledger_user, ledger_user.to_hex());
+
+    // r7inp-6aaaa-aaaaa-aaabq-cai
+    // b5c38c5c8e63d89751b8f8b3fd9deceda70c281b87957ca44319c9758a3dbef2
+    let canister_id_1: CanisterId = canister_from_str("r7inp-6aaaa-aaaaa-aaabq-cai").unwrap();
+    let canister_account_id_1: AccountIdentifier = AccountIdentifier::from(canister_id_1);
+
+    println!("canister_id_1: {:?}", canister_account_id_1.to_hex());
+
+    // cav4d-eaaaa-aaaah-aaqrq-cai
+    // de1f034caa685d629434aa2880e59512968c2197fc268c9c195068cd7b684425
+    let canister_id_2: CanisterId = canister_from_str("cav4d-eaaaa-aaaah-aaqrq-cai").unwrap();
+    let canister_account_id_2: AccountIdentifier = AccountIdentifier::from(canister_id_2);
+    println!("canister_id_2: {:?}", canister_account_id_2.to_hex());
+    
+
+    let canister = try_from(&[25, 164, 8, 222, 247, 226, 127, 20, 25, 228, 250, 17, 38, 101, 11, 160, 185, 107, 51, 90, 213, 5, 199, 20, 64, 243, 64, 251]).unwrap();
+    println!("canister: {:?}", canister);
+
 }
 
 fn principal_from_str(input: &str) -> Result<PrincipalId, PrincipalIdParseError> {
@@ -21,10 +57,8 @@ fn principal_from_str(input: &str) -> Result<PrincipalId, PrincipalIdParseError>
     let mut s = input.to_string();
     s.make_ascii_lowercase();
     s.retain(|c| c.is_ascii_alphanumeric());
-    println!("{:?}", s);
     match base32::decode(base32::Alphabet::RFC4648 { padding: false }, &s) {
         Some(mut bytes) => {
-            println!("{:?}\n{:?}", bytes, hex::encode(bytes.clone()));
             if bytes.len() < CRC_LENGTH_IN_BYTES {
                 return Err(PrincipalIdParseError::TooShort);
             }

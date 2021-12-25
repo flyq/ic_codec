@@ -139,7 +139,7 @@ dependencies = [
  "byteorder",
  "candid_derive",
  "codespan-reporting",
- "hex",
+ "hex 0.4.3",
  "ic-types 0.1.5",
  "lalrpop",
  "lalrpop-util",
@@ -339,7 +339,7 @@ dependencies = [
  "byteorder",
  "cfg-if 0.1.10",
  "futures",
- "hex",
+ "hex 0.4.3",
  "ic-base-types",
  "on_wire",
  "rustversion",
@@ -662,6 +662,12 @@ dependencies = [
 
 [[package]]
 name = "hex"
+version = "0.3.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "805026a5d0141ffc30abb3be3173848ad46a1b1664fe632428479619a3644d77"
+
+[[package]]
+name = "hex"
 version = "0.4.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7f24254aa9a54b5c858eaee2f5bccdb46aaf0e486a595ed5fd8f86ba55232a70"
@@ -696,7 +702,7 @@ source = "git+https://github.com/dfinity/ic#074feaa2c6cd61f98042ed4adde0a6d91338
 dependencies = [
  "arrayvec",
  "base64",
- "hex",
+ "hex 0.4.3",
  "ic-protobuf",
  "phantom_newtype",
  "serde",
@@ -806,7 +812,7 @@ checksum = "94dd8ec75019bc7159efe6ca2de5392e14a8e82c02ec6dae6d1b32af5337acd1"
 dependencies = [
  "base32",
  "crc32fast",
- "hex",
+ "hex 0.4.3",
  "serde",
  "serde_bytes",
  "sha2",
@@ -825,7 +831,7 @@ dependencies = [
  "candid",
  "chrono",
  "derive_more",
- "hex",
+ "hex 0.4.3",
  "ic-base-types",
  "ic-crypto-internal-types",
  "ic-crypto-sha256",
@@ -859,7 +865,7 @@ dependencies = [
  "bitflags",
  "cvt",
  "features",
- "hex",
+ "hex 0.4.3",
  "libc",
  "prost",
  "rand 0.8.4",
@@ -870,6 +876,7 @@ name = "ic_codec"
 version = "0.1.0"
 dependencies = [
  "base32",
+ "hex 0.3.2",
  "ic-base-types",
  "ledger-canister",
 ]
@@ -988,7 +995,7 @@ dependencies = [
  "dfn_http",
  "dfn_protobuf",
  "digest",
- "hex",
+ "hex 0.4.3",
  "ic-base-types",
  "ic-crypto-sha256",
  "ic-nns-constants",
